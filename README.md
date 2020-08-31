@@ -4,7 +4,7 @@
  * @Description   : 
  * @Date          : 2020-02-16 22:33:53
  * @LastEditors   : fineemb
- * @LastEditTime  : 2020-08-30 22:08:40
+ * @LastEditTime  : 2020-08-31 10:19:49
  -->
 
 # Lovelace Colorfulclouds Weather Card
@@ -25,7 +25,7 @@
 
   
 ## 预览
-![](1.gif)
+![](01.png)
 
 ## HACS 安装
 
