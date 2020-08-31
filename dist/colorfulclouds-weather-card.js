@@ -123,7 +123,7 @@ class WeatherCard extends LitElement {
       <ha-card>
         <span
           class="icon bigger"
-          style="background: none, url(icons/animated/${stateObj.attributes.skycon}.svg) no-repeat; background-size: contain;"
+          style="background: none, url(/hacsfiles/lovelace-colorfulclouds-weather-card/icons/animated/${stateObj.attributes.skycon}.svg) no-repeat; background-size: contain;"
           >${stateObj.state}
         </span>
         ${
@@ -217,7 +217,7 @@ class WeatherCard extends LitElement {
                           >
                           <br /><i
                             class="icon"
-                            style="background: none, url(icons/animated/${daily.skycon}.svg) no-repeat; background-size: contain;"
+                            style="background: none, url(/hacsfiles/lovelace-colorfulclouds-weather-card/icons/animated/${daily.skycon}.svg) no-repeat; background-size: contain;"
                           ></i>
                           <br /><span class="highTemp"
                             >${daily.temperature}${
@@ -309,7 +309,7 @@ class WeatherCard extends LitElement {
           color: var(--primary-text-color);
           position: absolute;
           right: 1em;
-          top: 0.3em;
+          top: 0.6em;
         }
 
         .tempc {
@@ -407,7 +407,7 @@ class WeatherCard extends LitElement {
         .icon.bigger {
           width: 10em;
           height: 10em;
-          margin-top: -4em;
+          margin-top: -3em;
           position: absolute;
           left: 0em;
         }
@@ -551,7 +551,7 @@ class WeatherMoreInfo extends LitElement {
                                     }
                                 )
                                 }</span>
-                            <i class="icon" style="background: none, url(icons/animated/${stateObj.attributes.hourly_skycon[i].value
+                            <i class="icon" style="background: none, url(/hacsfiles/lovelace-colorfulclouds-weather-card/icons/animated/${stateObj.attributes.hourly_skycon[i].value
                                 }.svg) no-repeat; background-size: contain;"></i>
                             <br />
                             <span style="border-bottom-color: hsla(0, 100%, ${((35-stateObj.attributes.hourly_temperature[i].value)*(50/45))+50}%, 1);" class="dtemp">${stateObj.attributes.hourly_temperature[i].value}${this.getUnit("temperature")}</span>
