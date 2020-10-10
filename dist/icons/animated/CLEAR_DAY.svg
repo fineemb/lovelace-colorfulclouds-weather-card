@@ -4,8 +4,8 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="64"
-    height="64"
+    width="40"
+    height="40"
     viewbox="0 0 64 64">
     <defs>
         <filter id="blur" width="200%" height="200%">
@@ -488,7 +488,7 @@
         ]]></style>
     </defs>
     <g filter="url(#blur)" id="day">
-        <g transform="translate(32,32)">
+        <g transform="translate(20,20)">
             <g class="am-weather-sun am-weather-sun-shiny am-weather-easing-ease-in-out">
                 <g>
                     <line fill="none" stroke="orange" stroke-linecap="round" stroke-width="2" transform="translate(0,9)" x1="0" x2="0" y1="0" y2="3" />

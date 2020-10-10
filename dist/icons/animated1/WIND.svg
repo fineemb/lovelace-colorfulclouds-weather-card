@@ -1,25 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- (c) ammap.com | SVG weather icons -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="40"
-    height="40"
-    viewbox="0 0 64 64">
-    <defs>
-        <filter id="blur" width="200%" height="200%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-            <feOffset dx="0" dy="4" result="offsetblur"/>
-            <feComponentTransfer>
-                <feFuncA type="linear" slope="0.05"/>
-            </feComponentTransfer>
-            <feMerge> 
-                <feMergeNode/>
-                <feMergeNode in="SourceGraphic"/> 
-            </feMerge>
-        </filter>
-        <style type="text/css"><![CDATA[
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="40"
+   height="40"
+   viewbox="0 0 64 64"
+   id="svg5080"
+   sodipodi:docname="WIND.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata5084">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     id="namedview5082"
+     showgrid="false"
+     inkscape:zoom="5.3530193"
+     inkscape:cx="27.422677"
+     inkscape:cy="36.591276"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="cloudy" />
+  <defs
+     id="defs5063">
+    <filter
+       id="blur"
+       width="2"
+       height="2">
+      <feGaussianBlur
+         in="SourceAlpha"
+         stdDeviation="3"
+         id="feGaussianBlur5046" />
+      <feOffset
+         dx="0"
+         dy="4"
+         result="offsetblur"
+         id="feOffset5048" />
+      <feComponentTransfer
+         id="feComponentTransfer5052">
+        <feFuncA
+           type="linear"
+           slope="0.05"
+           id="feFuncA5050" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge5058">
+        <feMergeNode
+           id="feMergeNode5054" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode5056" />
+      </feMerge>
+    </filter>
+    <style
+       type="text/css"
+       id="style5061"><![CDATA[
 /*
 ** CLOUDS
 */
@@ -32,10 +92,10 @@
   }
 
   50% {
-    -webkit-transform: translate(10px,0px);
-       -moz-transform: translate(10px,0px);
-        -ms-transform: translate(10px,0px);
-            transform: translate(10px,0px);
+    -webkit-transform: translate(6px,0px);
+       -moz-transform: translate(6px,0px);
+        -ms-transform: translate(6px,0px);
+            transform: translate(6px,0px);
   }
 
   100% {
@@ -486,18 +546,44 @@
 }
 
         ]]></style>
-    </defs>
-    <g filter="url(#blur)" id="night">
-        <g transform="translate(8,8)">
-            <g class="am-weather-moon-star-1">
-                <polygon fill="orange" points="3.3,1.5 4,2.7 5.2,3.3 4,4 3.3,5.2 2.7,4 1.5,3.3 2.7,2.7" stroke="none" stroke-miterlimit="10"/>
+  </defs>
+  <g
+     id="cloudy">
+    <g
+       id="g5077">
+      <!-- <g class="am-weather-cloud-1">
+                <path d="M47.7,35.4     c0-4.6-3.7-8.2-8.2-8.2c-1,0-1.9,0.2-2.8,0.5c-0.3-3.4-3.1-6.2-6.6-6.2c-3.7,0-6.7,3-6.7,6.7c0,0.8,0.2,1.6,0.4,2.3     c-0.3-0.1-0.7-0.1-1-0.1c-3.7,0-6.7,3-6.7,6.7c0,3.6,2.9,6.6,6.5,6.7l17.2,0C44.2,43.3,47.7,39.8,47.7,35.4z" fill="#91C0F8" stroke="white" stroke-linejoin="round" stroke-width="1.2" transform="translate(-10,-8), scale(0.6)"/>
             </g>
-            <g class="am-weather-moon-star-2">
-                <polygon fill="orange" points="3.3,1.5 4,2.7 5.2,3.3 4,4 3.3,5.2 2.7,4 1.5,3.3 2.7,2.7" stroke="none" stroke-miterlimit="10" transform="translate(20,10)"/>
-            </g>
-            <g class="am-weather-moon">
-                <path d="M14.5,13.2c0-3.7,2-6.9,5-8.7   c-1.5-0.9-3.2-1.3-5-1.3c-5.5,0-10,4.5-10,10s4.5,10,10,10c1.8,0,3.5-0.5,5-1.3C16.5,20.2,14.5,16.9,14.5,13.2z" fill="orange" stroke="orange" stroke-linejoin="round" stroke-width="2"/>
-            </g>
-        </g>
+            <g class="am-weather-cloud-2">
+                <path d="M47.7,35.4     c0-4.6-3.7-8.2-8.2-8.2c-1,0-1.9,0.2-2.8,0.5c-0.3-3.4-3.1-6.2-6.6-6.2c-3.7,0-6.7,3-6.7,6.7c0,0.8,0.2,1.6,0.4,2.3     c-0.3-0.1-0.7-0.1-1-0.1c-3.7,0-6.7,3-6.7,6.7c0,3.6,2.9,6.6,6.5,6.7l17.2,0C44.2,43.3,47.7,39.8,47.7,35.4z" fill="#57A0EE" stroke="white" stroke-linejoin="round" stroke-width="1.2" transform="translate(-20,-11)"/>
+            </g> -->
+      <path
+         class="am-weather-cloud-3"
+         d="M 7.5694543,16.676867 H 22.529876 a 3.7401057,3.7401057 0 0 0 0,-7.4802111 3.7401055,3.7401055 0 0 0 -3.740106,3.7401061"
+         fill="none"
+         stroke="#57a0ee"
+         stroke-width="2.24406"
+         stroke-linecap="round"
+         id="path5071"
+         style="stroke:#d4d4d4;stroke-opacity:1" />
+      <path
+         class="am-weather-cloud-2"
+         d="m 5.325391,21.164994 h 26.180738 a 3.7401055,3.7401055 0 0 0 0,-7.480211 3.7401055,3.7401055 0 0 0 -3.740105,3.740106"
+         fill="none"
+         stroke="#57a0ee"
+         stroke-width="2.24406"
+         stroke-linecap="round"
+         id="path5073"
+         style="stroke:#d4d4d4;stroke-opacity:1" />
+      <path
+         class="am-weather-cloud-1"
+         d="M 9.8135171,25.653121 H 26.269981 a 3.7401055,3.7401055 0 0 1 0,7.48021 3.7401055,3.7401055 0 0 1 -3.740105,-3.740105"
+         fill="none"
+         stroke="#57a0ee"
+         stroke-width="2.24406"
+         stroke-linecap="round"
+         id="path5075"
+         style="stroke:#b7b7b7;stroke-opacity:1" />
     </g>
+  </g>
 </svg>

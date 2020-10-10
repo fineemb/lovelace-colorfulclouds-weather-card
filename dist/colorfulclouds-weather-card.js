@@ -1,4 +1,4 @@
-console.info("%c  WEATHER CARD  \n%c  Version 1.1 ",
+console.info("%c  WEATHER CARD  \n%c  Version 1.3 ",
 "color: orange; font-weight: bold; background: black", 
 "color: white; font-weight: bold; background: dimgray");
 
@@ -358,10 +358,20 @@ class WeatherCard extends LitElement {
                     attributes.hourly_temperature.map(
                       
                       (daily,i) => html`
-                        <div class="hourly d${
+                        <div class="hourly${i>attributes.hourly_temperature.length-5?" last5":""} d${
                           new Date(attributes.hourly_temperature[i].datetime).toLocaleTimeString(
                             'en-US',{hour: "numeric",hour12: false})}">
-                            <span class="dayname">.</span>
+                            <span class="dayname ${new Date(attributes.hourly_temperature[i].datetime).getHours()==12?"show":""}">${
+                              new Date(attributes.hourly_temperature[i].datetime).toLocaleTimeString(
+                                  lang,
+                                  {
+                                  month: '2-digit',
+                                　day: '2-digit',
+                                  hour: "numeric",
+                                  hour12: false
+                                  }
+                              )
+                              }</span>
                             <i class="icon" style="background: none${i>0 && attributes.hourly_skycon[i].value==attributes.hourly_skycon[i-1].value?"":", url("+iconUrl+attributes.hourly_skycon[i].value+".svg) no-repeat"}; background-size: contain;"></i>
                             <br />
                             <span class="dayname">.</span>
@@ -372,7 +382,7 @@ class WeatherCard extends LitElement {
                       `
                     )
                   }
-                  <div class="show hourly showdata ${this.showTarget>attributes.hourly_temperature.length/2?"right":""}">
+                  <div class="show hourly showdata">
                       <span class="dayname">${
                         new Date(attributes.hourly_temperature[showdata].datetime).toLocaleTimeString(
                             lang,
@@ -409,11 +419,18 @@ class WeatherCard extends LitElement {
     // console.log("L:"+e.target.scrollLeft+",W:"+e.target.scrollWidth)
     let Hforecast = e.target;
     let Hs = Hforecast.children.length-1;
-    let scrollWidth = Hs*20
+    let scrollWidth = Hs*25
     let i = Math.floor(Hforecast.scrollLeft/((scrollWidth-Hforecast.clientWidth)/Hs));
     let offset_data = Hforecast.scrollLeft*scrollWidth/(scrollWidth-Hforecast.clientWidth);
-    offset_data = offset_data>scrollWidth?scrollWidth-20:offset_data;
-    offset_data = this.showTarget>Hs/2?offset_data-85:offset_data;
+    offset_data = offset_data>scrollWidth-25?scrollWidth-25:offset_data;
+    
+    if(this.showTarget>Hs/2){
+      offset_data = offset_data-85;
+      Hforecast.lastElementChild.classList.add("right");
+    }else{
+      Hforecast.lastElementChild.classList.remove("right");
+    }
+
     Hforecast.lastElementChild.style.left=offset_data+"px";
 
     if(i===this.showTarget)return;
@@ -552,8 +569,8 @@ class WeatherCard extends LitElement {
           min-width: 96px;
         }
         .icon-image > * {
-          flex: 0 0 96px;
-          height: 96px;
+          flex: 0 0 74px;
+          height: 74px;
         }
         .weather-icon {
           --mdc-icon-size: 64px;
@@ -654,7 +671,7 @@ class WeatherCard extends LitElement {
         }
         .hourly{
           display: block;
-          width: 20px;
+          width: 25px;
           line-height: 2;
           flex:none;
           text-align: center;
@@ -689,9 +706,8 @@ class WeatherCard extends LitElement {
           color: var(--secondary-text-color);
         }
         .icon {
-          width: 50px;
-          height: 50px;
-          margin-right: 5px;
+          width: 42px;
+          height: 42px;
           display: inline-block;
           vertical-align: middle;
           background-size: contain;
@@ -700,8 +716,8 @@ class WeatherCard extends LitElement {
           text-indent: -9999px;
         }
         .hourly .icon {
-          width: 30px;
-          height: 30px;
+          width: 25px;
+          height: 25px;
         }
         .hourly .dayname, .hourly .cloudrate, .hourly  .precipitation {
           color: #00000000;
@@ -713,6 +729,16 @@ class WeatherCard extends LitElement {
         .hourly.show .dayname,.hourly.show .dtemp,.hourly.show .precipitation,.hourly.show .cloudrate{
           color: var(--primary-text-color);
         }
+        .dayname.show {
+          color: var(--primary-text-color);
+          margin: 0 6px;
+        }
+        .hourly.last5{
+          overflow:hidden;
+        }
+        .hourly.last5 > .dayname{
+          color: #00000000;
+        }
         .dtemp{
           font-weight: bold;
           display: block;
@@ -721,6 +747,7 @@ class WeatherCard extends LitElement {
           overflow:visible;
           color: #00000000;
           height: 35px;
+          line-height: 35px;
         }
 
         .precipitation,.cloudrate {
@@ -752,7 +779,11 @@ class WeatherCard extends LitElement {
           position: relative;
           display:block;
           text-align: left;
-          margin: 0 5px
+          margin: 0 5px;
+          
+        }
+        .showdata > .dayname{
+          background: var( --ha-card-background, var(--card-background-color, white) )
         }
         .showdata.right {
           border-left: none;
