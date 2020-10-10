@@ -4,7 +4,7 @@
  * @Description   : 
  * @Date          : 2020-02-16 22:33:53
  * @LastEditors   : fineemb
- * @LastEditTime  : 2020-10-10 21:28:32
+ * @LastEditTime  : 2020-10-10 21:32:14
  -->
 
 # Lovelace Colorfulclouds Weather Card
@@ -43,32 +43,32 @@
 ## 图标
 
 ### 默认
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/CLEAR_DAY.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/CLEAR_NIGHT.svg)
+![](/dist/icons/animated/CLEAR_DAY.svg)
+![](/dist/icons/animated/CLEAR_NIGHT.svg)
 
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/DUST.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/FOG.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/WIND.svg)
+![](/dist/icons/animated/DUST.svg)
+![](/dist/icons/animated/FOG.svg)
+![](/dist/icons/animated/WIND.svg)
 
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/LIGHT_HAZE.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/MODERATE_HAZE.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/HEAVY_HAZE.svg)
+![](/dist/icons/animated/LIGHT_HAZE.svg)
+![](/dist/icons/animated/MODERATE_HAZE.svg)
+![](/dist/icons/animated/HEAVY_HAZE.svg)
 
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/LIGHT_SNOW.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/MODERATE_SNOW.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/HEAVY_SNOW.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/STORM_SNOW.svg)
+![](/dist/icons/animated/LIGHT_SNOW.svg)
+![](/dist/icons/animated/MODERATE_SNOW.svg)
+![](/dist/icons/animated/HEAVY_SNOW.svg)
+![](/dist/icons/animated/STORM_SNOW.svg)
 
 
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/LIGHT_RAIN.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/MODERATE_RAIN.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/HEAVY_RAIN.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/STORM_RAIN.svg)
+![](/dist/icons/animated/LIGHT_RAIN.svg)
+![](/dist/icons/animated/MODERATE_RAIN.svg)
+![](/dist/icons/animated/HEAVY_RAIN.svg)
+![](/dist/icons/animated/STORM_RAIN.svg)
 
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/CLOUDY.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/PARTLY_CLOUDY_DAY.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/PARTLY_CLOUDY_NIGHT.svg)
-![](https://raw.githubusercontent.com/fineemb/lovelace-colorfulclouds-weather-card/master/dist/icons/animated/SAND.svg)
+![](/dist/icons/animated/CLOUDY.svg)
+![](/dist/icons/animated/PARTLY_CLOUDY_DAY.svg)
+![](/dist/icons/animated/PARTLY_CLOUDY_NIGHT.svg)
+![](/dist/icons/animated/SAND.svg)
 
 ### 灰色
 
