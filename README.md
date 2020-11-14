@@ -4,7 +4,7 @@
  * @Description   : 
  * @Date          : 2020-02-16 22:33:53
  * @LastEditors   : fineemb
- * @LastEditTime  : 2020-10-10 21:32:14
+ * @LastEditTime  : 2020-11-14 21:48:14
  -->
 
 # Lovelace Colorfulclouds Weather Card
@@ -36,6 +36,8 @@
 + v1.3
   + 优化时间预报UI细节
   + 增加一套灰色图标
++ v1.3.1
+  + 某些情况下消灭滚动条
   
 ## 预览
 ![](01.gif)
