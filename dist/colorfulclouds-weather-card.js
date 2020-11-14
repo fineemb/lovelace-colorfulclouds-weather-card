@@ -1,4 +1,4 @@
-console.info("%c  WEATHER CARD  \n%c  Version 1.3 ",
+console.info("%c  WEATHER CARD  \n%c  Version 1.3.1 ",
 "color: orange; font-weight: bold; background: black", 
 "color: white; font-weight: bold; background: dimgray");
 
@@ -533,7 +533,7 @@ class WeatherCard extends LitElement {
         width: 100%;
         margin: 0 auto;
         display: flex;
-        overflow-x: scroll;
+        overflow-x: auto;
       }
       ::-webkit-scrollbar {
         width: 6px;
