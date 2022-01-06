@@ -1,4 +1,4 @@
-console.info("%c  WEATHER CARD  \n%c  Version 1.3.1 ",
+console.info("%c  WEATHER CARD  \n%c  Version 1.3.2 ",
 "color: orange; font-weight: bold; background: black", 
 "color: white; font-weight: bold; background: dimgray");
 
