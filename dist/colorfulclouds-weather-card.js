@@ -470,7 +470,7 @@ class WeatherCard extends LitElement {
     let nowDate = new Date()
 
     if(inDate.getDate() === nowDate.getDate()){
-      retext = this.hass.localize("ui.panel.calendar.today")
+      retext = this.hass.localize("ui.components.date-range-picker.ranges.today")
     }
     return retext
   }
