@@ -1,4 +1,4 @@
-console.info("%c  WEATHER CARD  \n%c  Version 1.3.2 ",
+console.info("%c  WEATHER CARD  \n%c  Version 1.3.3 ",
 "color: orange; font-weight: bold; background: black", 
 "color: white; font-weight: bold; background: dimgray");
 
@@ -123,7 +123,7 @@ class WeatherCard extends LitElement {
     
     if (this._config.entity==="none"){
 
-      if (this.hass.config.components.indexOf("colorfulclouds") == -1){
+      if (this.hass.config.components.indexOf("tianqi") == -1){
         return html`
         <style>
           .not-found {
@@ -134,9 +134,9 @@ class WeatherCard extends LitElement {
         </style>
         <ha-card>
           <div class="not-found">
-            未安装彩云天气集成: <br/>
-            此卡片需要依赖彩云天气集成，
-            <a href="https://github.com/fineemb/Colorfulclouds-weather">点击前往安装</a>
+            未安装天气预报集成: <br/>
+            此卡片需要依赖天气预报集成，
+            <a href="https://github.com/hasscc/tianqi">点击前往安装</a>
           </div>
         </ha-card>
       `;
