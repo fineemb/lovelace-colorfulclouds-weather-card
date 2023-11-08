@@ -142,7 +142,7 @@ class WeatherCard extends LitElement {
       `;
       }
 
-      var RE1 = new RegExp("weather\.")
+      var RE1 = new RegExp("^weather\.")
       Object.keys(this.hass.states).filter(a => RE1.test(a) ).map(entId => {
           this._config.entity=entId;
         }
