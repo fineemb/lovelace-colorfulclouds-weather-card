@@ -11,7 +11,7 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
 
-这是一个适用于[天气预报集成](https://github.com/hasscc/tianqi)的Lovelace卡片
+这是一个适用于[天气预报集成](https://github.com/fineemb/Colorfulclouds-weather)的Lovelace卡片
 
 + 支持15天天气预报的展示
 + 支持小时详细预报
@@ -43,7 +43,7 @@
 + v1.3.3
   + 更改适配插件   
 + v2.0.0
-  + 搭配[天气预报集成](https://github.com/hasscc/tianqi)同步更新
+  + 搭配[天气预报集成](https://github.com/fineemb/Colorfulclouds-weather)同步更新
   
 ## 预览
 ![](01.gif)
