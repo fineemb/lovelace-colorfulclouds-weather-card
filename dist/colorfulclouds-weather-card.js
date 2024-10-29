@@ -548,33 +548,35 @@ class WeatherCard extends LitElement {
       (Dforecast.scrollWidth - Dforecast.offsetWidth);
     Hforecast.scrollLeft = Dforecast.scrollLeft * scale;
   }
-  _hscroll(e) {
-    // console.log("L:"+e.target.scrollLeft+",W:"+e.target.scrollWidth)
+  _hscroll(e) { // zzmod
     let Hforecast = e.target;
     let Hs = Hforecast.children.length - 1;
     let scrollWidth = Hs * 25;
-    let i = Math.floor(
-      Hforecast.scrollLeft / ((scrollWidth - Hforecast.clientWidth) / Hs)
-    );
-    let offset_data =
-      (Hforecast.scrollLeft * scrollWidth) /
-      (scrollWidth - Hforecast.clientWidth);
-    offset_data =
-      offset_data > scrollWidth - 25 ? scrollWidth - 25 : offset_data;
-
-    if (this.showTarget > Hs / 2) {
+    let now = new Date();
+    
+    // Find index of the current hour or the next closest hour in the forecast data
+    let currentIndex = this.hourly.findIndex(hour => {
+      let hourDate = new Date(hour.datetime);
+      return hourDate.getHours() >= now.getHours() && hourDate.getDate() === now.getDate();
+    });
+    currentIndex = currentIndex === -1 ? 0 : currentIndex; // Use 0 if not found (as a fallback)
+  
+    let offset = currentIndex * 25; // Assuming each hour block is 25px wide
+    Hforecast.scrollLeft = offset;
+  
+    let offset_data = (Hforecast.scrollLeft * scrollWidth) / (scrollWidth - Hforecast.clientWidth);
+    offset_data = offset_data > scrollWidth - 25 ? scrollWidth - 25 : offset_data;
+  
+    if (currentIndex > Hs / 2) {
       offset_data = offset_data - 85;
       Hforecast.lastElementChild.classList.add("right");
     } else {
       Hforecast.lastElementChild.classList.remove("right");
     }
-
+  
     Hforecast.lastElementChild.style.left = offset_data + "px";
-
-    if (i === this.showTarget) return;
-    i = i === Hs ? Hs - 1 : i;
-    this.showTarget = i;
-    // console.log("L:"+this.showTarget);
+  
+    this.showTarget = currentIndex;
   }
   getUnit(measure) {
     const lengthUnit = this._hass.config.unit_system.length || "";
