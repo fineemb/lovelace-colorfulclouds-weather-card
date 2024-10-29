@@ -579,11 +579,9 @@ class WeatherCard extends LitElement {
           const itemWidth = hourlyItems[0].offsetWidth;
           const scrollLeft = 
             (itemWidth*(hourlyItems.length-1) - forecastContainer.clientWidth) * 
-              (20 / (hourlyItems.length-1) );
+              (currentHourIndex / (hourlyItems.length-1) );
           console.log("scrollLeft:" + scrollLeft);
           forecastContainer.scroll(scrollLeft, 0);
-          // forecastContainer.scrollLeft = scrollLeft > 0 ? scrollLeft : 0;
-          // this.showTarget = currentHourIndex;
           this.requestUpdate();
           // 手动调用 _hscroll() 方法，模拟滚动事件
           this._hscroll();
