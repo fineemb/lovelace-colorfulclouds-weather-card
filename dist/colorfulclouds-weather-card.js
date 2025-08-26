@@ -209,7 +209,13 @@ class WeatherCard extends LitElement {
               )
             );
             this._last_updated = last_updated;
+
+            this.updateComplete.then(() => {
+              // 调用调整函数
+              this._adjustScrollPosition();
+            });
           });
+        
       }
     }
   }
@@ -437,7 +443,7 @@ class WeatherCard extends LitElement {
           : ""}
         ${this.hourly && this.hourly.length > 0 && this._config.show_houer
           ? html`
-              <div class="forecast clear" @scroll="${this._hscroll}">
+              <div class="forecast clear hourly-forecast" @scroll="${this._hscroll}">
                 ${this.hourly.map(
                   (hourly, i) => html`
                     <div
@@ -548,11 +554,47 @@ class WeatherCard extends LitElement {
       (Dforecast.scrollWidth - Dforecast.offsetWidth);
     Hforecast.scrollLeft = Dforecast.scrollLeft * scale;
   }
+  
+
+  // firstUpdated() {
+  //   this._adjustScrollPosition();
+  // }
+
+  _adjustScrollPosition() {
+    if (this.hourly && this.hourly.length > 0 && this._config.show_houer) {
+      const now = new Date();
+      let currentHourIndex = 0;
+      for (let i = 0; i < this.hourly.length; i++) {
+        const itemTime = new Date(this.hourly[i].datetime);
+        if (itemTime >= now) {
+          currentHourIndex = i;
+          break;
+        }
+      }
+      const forecastContainer = this.shadowRoot.querySelector('.hourly-forecast');
+      if (forecastContainer) {
+        console.log(forecastContainer);
+        const hourlyItems = forecastContainer.querySelectorAll('.hourly');
+        if (hourlyItems && hourlyItems.length > 0) {
+          const itemWidth = hourlyItems[0].offsetWidth;
+          const scrollLeft = 
+            (itemWidth*(hourlyItems.length-1) - forecastContainer.clientWidth) * 
+              (currentHourIndex / (hourlyItems.length-1) );
+          console.log("scrollLeft:" + scrollLeft);
+          forecastContainer.scroll(scrollLeft, 0);
+          this.requestUpdate();
+          // 手动调用 _hscroll() 方法，模拟滚动事件
+          this._hscroll();
+        }
+      }
+    }
+  }
+
   _hscroll(e) {
     // console.log("L:"+e.target.scrollLeft+",W:"+e.target.scrollWidth)
     let Hforecast = e.target;
-    let Hs = Hforecast.children.length - 1;
-    let scrollWidth = Hs * 25;
+    let Hs = Hforecast.children.length - 1; // 小时项的总数
+    let scrollWidth = Hs * 25; // 可滚动的总宽度
     let i = Math.floor(
       Hforecast.scrollLeft / ((scrollWidth - Hforecast.clientWidth) / Hs)
     );
@@ -624,6 +666,7 @@ class WeatherCard extends LitElement {
     if (!oldHass || oldHass.themes !== this._hass.themes) {
       this.applyThemesOnElement(this, this._hass.themes, this._config.theme);
     }
+
   }
 
   applyThemesOnElement(element, themes, localTheme) {
