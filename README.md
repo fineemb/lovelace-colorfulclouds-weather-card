@@ -19,6 +19,9 @@
 
 ## 更新
 
++ v2.1.0
+  + 表单编辑器并修复新版 HA 前端兼容性
+
 + v2.0.0
   + 搭配[天气预报集成](https://github.com/fineemb/Colorfulclouds-weather)同步更新
 
@@ -51,11 +54,13 @@
   + 首次发布
 
 ## 预览
+
 ![](01.gif)
 
 ## 图标
 
 ### 默认
+
 ![](/dist/icons/animated/CLEAR_DAY.svg)
 ![](/dist/icons/animated/CLEAR_NIGHT.svg)
 
@@ -71,7 +76,6 @@
 ![](/dist/icons/animated/MODERATE_SNOW.svg)
 ![](/dist/icons/animated/HEAVY_SNOW.svg)
 ![](/dist/icons/animated/STORM_SNOW.svg)
-
 
 ![](/dist/icons/animated/LIGHT_RAIN.svg)
 ![](/dist/icons/animated/MODERATE_RAIN.svg)
@@ -101,7 +105,6 @@
 ![](/dist/icons/animated1/HEAVY_SNOW.svg)
 ![](/dist/icons/animated1/STORM_SNOW.svg)
 
-
 ![](/dist/icons/animated1/LIGHT_RAIN.svg)
 ![](/dist/icons/animated1/MODERATE_RAIN.svg)
 ![](/dist/icons/animated1/HEAVY_RAIN.svg)
@@ -112,7 +115,6 @@
 ![](/dist/icons/animated1/PARTLY_CLOUDY_NIGHT.svg)
 ![](/dist/icons/animated1/SAND.svg)
 
-
 ## HACS 安装
 
 搜索Colorfulclouds weather card, 或者手动添加地址安装
@@ -121,6 +123,7 @@
 
 使用HACS安装后，可以在前端`编辑仪表盘-右下角+按钮` 添加和配置卡片
 小时预报中的三个条状信息：
+
 + 第一条是温度，会根据这个时间段内的温差来显示不同的颜色
 + 第二条是云量，越蓝云层越多，反之越白
 + 第三条是降雨，颜色越深雨越大
