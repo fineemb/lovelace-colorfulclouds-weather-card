@@ -3,29 +3,33 @@ console.info(
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );
-const deps = [
-  "paper-input",
-  "paper-dropdown-menu",
-  "paper-item",
-  "paper-listbox",
-];
-deps.map((dep) => {
-  if (!customElements.get(dep)) {
-    console.log("imported", dep);
-    import(`https://unpkg.com/@polymer/${dep}/${dep}.js?module`);
-  }
-});
-const preloadCard = (type) =>
-  window
-    .loadCardHelpers()
-    .then(({ createCardElement }) => createCardElement({ type }));
-const LitElement = Object.getPrototypeOf(
-  customElements.get("ha-panel-lovelace")
-);
+// 兼容不同版本 HA 前端：老版本通过 ha-panel-lovelace / hui-view 的原型
+// 暴露 LitElement 的 html/css，新版本已不再暴露，此时回退到 CDN 加载
+// 独立的 lit 实现，避免整个卡片模块加载失败。
+let LitElement = null;
+let html = null;
+let css = null;
 
-const html = LitElement.prototype.html;
-const css = LitElement.prototype.css;
-const includeDomains = ["weather"];
+try {
+  const baseClass =
+    customElements.get("ha-panel-lovelace") ||
+    customElements.get("hui-view");
+  const proto = baseClass ? Object.getPrototypeOf(baseClass) : null;
+  if (proto) {
+    LitElement = proto;
+    html = proto.prototype.html || proto.html;
+    css = proto.prototype.css || proto.css;
+  }
+} catch (e) {
+  // 忽略，走 CDN 回退
+}
+
+if (!LitElement || typeof html !== "function" || typeof css !== "function") {
+  const lit = await import("https://esm.sh/lit@3.2.1");
+  LitElement = lit.LitElement;
+  html = lit.html;
+  css = lit.css;
+}
 const windDirections = [
   "N",
   "NNE",
@@ -109,8 +113,65 @@ class WeatherCard extends LitElement {
     };
   }
 
-  static getConfigElement() {
-    return document.createElement("colorfulclouds-weather-card-editor");
+  static getConfigForm() {
+    return {
+      schema: [
+        {
+          name: "entity",
+          required: true,
+          selector: { entity: { domain: "weather" } },
+        },
+        {
+          type: "grid",
+          name: "",
+          schema: [
+            { name: "name", selector: { text: {} } },
+            { name: "theme", selector: { theme: {} } },
+            { name: "icon", selector: { text: {} } },
+            {
+              name: "secondary_info_attribute",
+              selector: { attribute: {} },
+              context: { filter_entity: "entity" },
+            },
+          ],
+        },
+        {
+          type: "grid",
+          name: "",
+          schema: [
+            { name: "show_realtime", selector: { boolean: {} } },
+            { name: "show_daily", selector: { boolean: {} } },
+            { name: "show_houer", selector: { boolean: {} } },
+          ],
+        },
+      ],
+      computeLabel: (schema) => {
+        switch (schema.name) {
+          case "icon":
+            return "图标路径";
+          case "secondary_info_attribute":
+            return "副信息属性";
+          case "show_realtime":
+            return "实时天气";
+          case "show_daily":
+            return "按天预报";
+          case "show_houer":
+            return "小时预报";
+        }
+        return undefined;
+      },
+      computeHelper: (schema) => {
+        switch (schema.name) {
+          case "entity":
+            return "此卡片需要彩云天气（Colorfulclouds）或中国天气（tianqi）集成提供的 weather 实体";
+          case "icon":
+            return "默认使用卡片自带图标集，可填写第三方图标路径（以 / 结尾），留空使用默认";
+          case "secondary_info_attribute":
+            return "选择要显示的实体属性，留空则不显示副信息";
+        }
+        return undefined;
+      },
+    };
   }
   static getStubConfig() {
     return {
@@ -985,220 +1046,6 @@ class WeatherCard extends LitElement {
 }
 customElements.define("weather-card", WeatherCard);
 
-export class WeatherEditor extends LitElement {
-  setConfig(config) {
-    // preloadCard({ type: "weather-forecast", config: config });
-    // customElements.get("hui-entity-button-card");
-    this.config = config;
-  }
-
-  static get properties() {
-    return {
-      hass: {},
-      config: {},
-    };
-  }
-  render() {
-    var RE1 = new RegExp("weather.");
-    this._entity = this.config.entity;
-    let attributes = this.hass.states[this._entity]?.attributes;
-    return html`
-      <div class="card-config">
-        <!-- <ha-entity-picker
-          .label="${this.hass.localize(
-          "ui.panel.lovelace.editor.card.generic.entity"
-        )} (${this.hass.localize(
-          "ui.panel.lovelace.editor.card.config.required"
-        )})"
-          .hass=${this.hass}
-          .value=${this.config.entity}
-          .configValue=${"entity"}
-          .includeDomains=${includeDomains}
-          @change=${this._valueChanged}
-          allow-custom-entity
-        ></ha-entity-picker> -->
-        <paper-input-container>
-          <input
-            type="text"
-            value="${this.config.entity}"
-            slot="input"
-            list="browsers"
-            .configValue="${"entity"}"
-            autocapitalize="none"
-            @change="${this._valueChanged}"
-          />
-          <datalist id="browsers">
-            ${Object.keys(this.hass.states)
-              .filter((a) => RE1.test(a))
-              .map(
-                (entId) => html`
-                  <option value=${entId}>
-                    ${this.hass.states[entId].attributes.friendly_name || entId}
-                  </option>
-                `
-              )}
-          </datalist>
-        </paper-input-container>
-
-        <paper-input
-          label="天气图标路径"
-          .value="${this.config.icon}"
-          .configValue="${"icon"}"
-          @value-changed="${this._valueChanged}"
-        ></paper-input>
-
-        <div class="side-by-side">
-          <paper-input
-            .label="${this.hass.localize(
-              "ui.panel.lovelace.editor.card.generic.name"
-            )} (${this.hass.localize(
-              "ui.panel.lovelace.editor.card.config.optional"
-            )})"
-            .value=${this.config.name}
-            .configValue=${"name"}
-            @value-changed=${this._valueChanged}
-          ></paper-input>
-          <hui-theme-select-editor
-            .hass=${this.hass}
-            .value=${this.config.theme}
-            .configValue=${"theme"}
-            @value-changed=${this._valueChanged}
-          ></hui-theme-select-editor>
-        </div>
-
-        <div class="side-by-side">
-          <paper-input-container>
-            <label slot="label">
-              ${this.hass.localize(
-                "ui.panel.lovelace.editor.card.generic.secondary_info_attribute"
-              )}
-              (${this.hass.localize(
-                "ui.panel.lovelace.editor.card.config.optional"
-              )})
-            </label>
-            <input
-              type="text"
-              value="${this.config.secondary_info_attribute}"
-              slot="input"
-              list="attributelist"
-              autocapitalize="none"
-              .configValue="${"secondary_info_attribute"}"
-              @change=${this._valueChanged}
-              @focus=${this._focusEntity}
-            />
-          </paper-input-container>
-          <ha-formfield label="实时天气">
-            <ha-switch
-              id="df"
-              ?checked=${this.config.show_realtime}
-              value="normal"
-              name="style_mode"
-              .configValue="${"show_realtime"}"
-              @change="${this._valueChanged}"
-            ></ha-switch>
-          </ha-formfield>
-          <ha-formfield label="按天预报">
-            <ha-switch
-              id="df"
-              ?checked=${this.config.show_daily}
-              value="normal"
-              name="style_mode"
-              .configValue="${"show_daily"}"
-              @change="${this._valueChanged}"
-            ></ha-switch>
-          </ha-formfield>
-          <ha-formfield label="小时预报">
-            <ha-switch
-              id="hf"
-              ?checked=${this.config.show_houer}
-              value="normal"
-              name="style_mode"
-              .configValue="${"show_houer"}"
-              @change="${this._valueChanged}"
-            ></ha-switch>
-          </ha-formfield>
-        </div>
-        <datalist id="entitieslist">
-          ${Object.keys(this.hass.states)
-            .filter((a) => RE1.test(a))
-            .map(
-              (entId) => html`
-                <option value=${entId}>
-                  ${this.hass.states[entId].attributes.friendly_name || entId}
-                </option>
-              `
-            )}
-        </datalist>
-        ${this.hass.states[this._entity]
-          ? html`
-              <datalist id="attributelist">
-                ${Object.keys(attributes).map(
-                  (item) => html`
-                    <option value=${item}>
-                      ${this.hass.localize(
-                        `ui.card.weather.attributes.${item}`
-                      )}
-                    </option>
-                  `
-                )}
-              </datalist>
-            `
-          : ``}
-      </div>
-    `;
-  }
-  static get styles() {
-    return css`
-      a {
-        color: var(--accent-color);
-      }
-      .side-by-side {
-        display: flex;
-        align-items: flex-end;
-        flex-wrap: wrap;
-      }
-      .side-by-side > * {
-        flex: 1;
-        padding-right: 4px;
-      }
-    `;
-  }
-  _focusEntity(e) {
-    e.target.value = "";
-  }
-
-  _valueChanged(e) {
-    const target = e.target;
-
-    if (!this.config || !this.hass || !target) {
-      return;
-    }
-    let configValue = target.configValue;
-    let newConfig = {
-      ...this.config,
-    };
-    (newConfig[configValue] =
-      configValue === "entity" ||
-      configValue === "icon" ||
-      configValue === "name" ||
-      configValue === "theme" ||
-      configValue === "secondary_info_attribute"
-        ? target.value
-        : target.checked),
-      this.configChanged(newConfig);
-  }
-
-  configChanged(newConfig) {
-    const event = new Event("config-changed", {
-      bubbles: true,
-      composed: true,
-    });
-    event.detail = { config: newConfig };
-    this.dispatchEvent(event);
-  }
-}
-
-customElements.define("colorfulclouds-weather-card-editor", WeatherEditor);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "weather-card",
